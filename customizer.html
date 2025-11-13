@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeeVerse | Diseñador 3D</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
+    <style>
+        /* CSS necesario */
+        .customizer-canvas {
+            min-height: 500px;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            touch-action: none; 
+        }
+        canvas {
+            display: block;
+            width: 100% !important; 
+            height: 100% !important;
+            cursor: grab; /* Cursor interactivo */
+        }
+        .color-selector-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+        }
+        .color-selector-swatch.active {
+            border-color: #6366f1; 
+            box-shadow: 0 0 0 2px white, 0 0 0 4px #6366f1;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <header class="sticky top-0 z-10 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold tracking-tight">
+                <a href="index.html" class="serif-title">TeeVerse</a>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="shop.html" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Tienda</a>
+                <a href="customizer.html" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent border-gray-900 pb-1">Diseñador</a>
+                <a href="#" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Sobre Nosotros</a>
+            </nav>
+            <div class="flex space-x-4 items-center">
+                <button class="p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <a href="#" class="p-2 rounded-full hover:bg-gray-100 transition relative">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-indigo-600 rounded-full">2</span>
+                </a>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section class="text-center mb-8">
+            <h1 class="serif-title text-5xl font-extrabold mb-2">Diseñador 3D Interactivo</h1>
+            <p class="text-lg text-gray-500">Usa el ratón para rotar el modelo. Haz clic y arrastra el lienzo para mover el diseño.</p>
+        </section>
+        
+        <div class="customizer-layout grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <aside class="lg:col-span-1 p-6 border border-gray-100 rounded-xl shadow-lg bg-white order-2 lg:order-1">
+                <h2 class="text-2xl font-bold mb-6">Panel de Diseño</h2>
+                
+                <div class="space-y-8">
+                    
+                    <div class="control-group border-b pb-4">
+                        <h3 class="font-semibold mb-3 text-lg text-indigo-700">1. Maqueta y Color</h3>
+                        <div class="mb-4">
+                            <h4 class="font-medium mb-2 text-sm">Modelo</h4>
+                            <select id="model-select" class="w-full p-2 border border-gray-300 rounded-lg" onchange="alert('Cambio de modelo simulado a: ' + this.value)">
+                                <option value="cylinder">T-Shirt Clásica (Cilindro 3D)</option>
+                                <option value="box">Sudadera (Cubo 3D - Mock)</option>
+                            </select>
+                        </div>
+                        <div class="mb-2">
+                            <h4 class="font-medium mb-2 text-sm">Color Base</h4>
+                            <div class="flex flex-wrap gap-2" id="tshirt-color-selectors">
+                                <div class="color-selector-swatch active" style="background-color: #ffffff;" data-color="#ffffff" title="Blanco" onclick="updateTshirtColor('#ffffff', this)"></div>
+                                <div class="color-selector-swatch" style="background-color: #1f2937;" data-color="#1f2937" title="Negro" onclick="updateTshirtColor('#1f2937', this)"></div>
+                                <div class="color-selector-swatch" style="background-color: #ef4444;" data-color="#ef4444" title="Rojo" onclick="updateTshirtColor('#ef4444', this)"></div>
+                                <div class="color-selector-swatch" style="background-color: #3b82f6;" data-color="#3b82f6" title="Azul" onclick="updateTshirtColor('#3b82f6', this)"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group border-b pb-4">
+                        <h3 class="font-semibold mb-3 text-lg text-indigo-700">2. Diseño (Texto/Gráfico)</h3>
+                        
+                        <h4 class="font-medium mb-2 text-sm">Texto</h4>
+                        <input 
+                            type="text" 
+                            id="design-text-input"
+                            placeholder="Escribe tu texto aquí..." 
+                            class="w-full p-2 border border-gray-300 rounded-lg mb-2" 
+                            onkeyup="updateDesignText(this.value)"
+                            onchange="updateDesignText(this.value)"
+                        />
+                        <div class="flex space-x-4 mb-4">
+                            <div class="w-1/2">
+                                <h4 class="font-medium mb-2 text-sm">Color de Texto</h4>
+                                <input type="color" id="design-text-color" value="#1f2937" onchange="updateDesignTextColor(this.value)" class="w-full h-10 p-0 rounded-lg border-none overflow-hidden cursor-pointer" title="Seleccionar Color de Texto">
+                            </div>
+                            <div class="w-1/2">
+                                <h4 class="font-medium mb-2 text-sm">Zoom / Escala</h4>
+                                <div class="flex space-x-1">
+                                    <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-200 transition" onclick="scaleDesign(1.1)" title="Aumentar Tamaño">A+</button>
+                                    <button class="flex-1 bg-gray-100 text-gray-700 py-2 rounded-lg text-sm hover:bg-gray-200 transition" onclick="scaleDesign(0.9)" title="Disminuir Tamaño">A-</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h4 class="font-medium mb-2 text-sm">Gráfico</h4>
+                        <input 
+                            type="file" 
+                            id="design-image-input" 
+                            accept="image/*" 
+                            class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+                            onchange="handleImageUpload(event)"
+                        />
+                        <p class="text-xs text-gray-400 mt-1">Sube un PNG o SVG transparente.</p>
+                    </div>
+
+                    <div class="control-group">
+                        <h3 class="font-semibold mb-3 text-lg text-indigo-700">3. Finalizar</h3>
+                        
+                        <button onclick="alert('Diseño Añadido al Carrito! Estado: Camiseta ' + customizerState.tshirtColor)" class="w-full bg-indigo-600 text-white font-semibold py-3 rounded-lg hover:bg-indigo-700 transition mb-3">
+                            Añadir Diseño al Carrito ($45.00)
+                        </button>
+                        <button onclick="resetDesign()" class="w-full bg-gray-200 text-gray-700 font-semibold py-2 rounded-lg hover:bg-gray-300 transition">
+                            Restablecer Diseño
+                        </button>
+                        <p class="text-xs text-gray-500 mt-2 text-center">Precio estimado por unidad.</p>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="lg:col-span-2 p-6 border border-gray-100 rounded-xl shadow-2xl bg-white order-1 lg:order-2">
+                
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-2xl font-bold">Vista 3D Interactiva - <span id="current-view">FRONTAL</span></h2>
+                    <div class="flex space-x-2" id="view-controls">
+                        <span class="text-sm font-semibold text-gray-500 pt-1">Vista:</span>
+                        <button class="view-btn p-2 rounded-md hover:bg-gray-100 transition text-sm font-semibold border border-gray-200 bg-gray-200" 
+                            data-view="frontal" onclick="updateTshirtView('frontal')" title="Vista Frontal">Frontal</button>
+                        <button class="view-btn p-2 rounded-md hover:bg-gray-100 transition text-sm font-semibold border border-gray-200" 
+                            data-view="trasera" onclick="updateTshirtView('trasera')" title="Vista Trasera">Trasera</button>
+                        <button class="view-btn p-2 rounded-md hover:bg-gray-100 transition text-sm font-semibold border border-gray-200" 
+                            data-view="lateral" onclick="updateTshirtView('lateral')" title="Vista Lateral">Lateral</button>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                         <span class="text-sm font-semibold text-gray-500 pt-1">Cámara:</span>
+                        <button onclick="window.zoomCamera(1.1)" class="p-2 rounded-md hover:bg-gray-100 transition text-sm font-semibold border border-gray-200" title="Acercar">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14m-7-7h14"/></svg>
+                        </button>
+                        <button onclick="window.zoomCamera(0.9)" class="p-2 rounded-md hover:bg-gray-100 transition text-sm font-semibold border border-gray-200" title="Alejar">
+                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/></svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="customizer-canvas-container" class="customizer-canvas rounded-xl">
+                    </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-50 border-t border-gray-100 mt-12 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+            
+            <div class="col-span-2 md:col-span-1">
+                <h4 class="serif-title text-xl font-bold mb-3">TeeVerse</h4>
+                <p class="text-gray-500">Arte que puedes vestir.</p>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-3">Descubrir</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="shop.html" class="hover:text-indigo-600">Novedades</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Artistas</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Colecciones</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-3">Ayuda</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="#" class="hover:text-indigo-600">FAQs</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Envíos y Devoluciones</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-3">Suscríbete</h4>
+                <form onsubmit="handleSubscribe(event)">
+                    <input type="email" placeholder="Tu correo electrónico" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 mb-2 text-gray-900">
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition">Unirme</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-10 text-xs text-gray-500">
+            <p>&copy; 2025 TeeVerse. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <script src="app.js"></script>
+    
+    <script>
+        window.onload = function() {
+            // Inicializa la escena 3D y la lógica de arrastre al cargar la página.
+            initThreeDScene(); 
+            initDragEvents();
+            updateCustomizerPreview();
+            updateCartCount();
+        };
+    </script>
+</body>
+</html>

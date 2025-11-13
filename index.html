@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeeVerse | Inicio</title>
+    <!-- Carga de Tailwind CSS (Necesario en cada HTML) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap)" rel="stylesheet">
+    <!-- Carga de estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 1. Encabezado (Header) - Fijo y Minimalista -->
+    <header class="sticky top-0 z-10 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold tracking-tight">
+                <a href="index.html" class="serif-title">TeeVerse</a>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="shop.html" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Tienda</a>
+                <a href="customizer.html" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Diseñador</a>
+                <a href="#" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Sobre Nosotros</a>
+            </nav>
+            <div class="flex space-x-4 items-center">
+                <!-- Iconos (Mock de Lucide Icons) --><button class="p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <a href="#" class="p-2 rounded-full hover:bg-gray-100 transition relative">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-indigo-600 rounded-full">2</span>
+                </a>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Contenido Principal (Página HOME) -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Section / Banner principal --><section class="relative bg-gray-50 rounded-xl overflow-hidden mb-12 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-2">
+                
+                <!-- Columna de Texto y CTA --><div class="p-8 sm:p-16 flex flex-col justify-center text-center lg:text-left">
+                    <h1 class="serif-title text-5xl sm:text-7xl font-extrabold mb-4 leading-tight text-gray-900">
+                        Crea Tu Obra. Vístela.
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8">
+                        Diseña tu camiseta única con nuestra herramienta personalizada o explora la última colección de artistas independientes.
+                    </p>
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
+                        <a href="customizer.html" class="bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-indigo-700 transition shadow-lg text-center">
+                            Diseñar Ahora
+                        </a>
+                        <a href="shop.html" class="bg-white text-gray-900 border border-gray-300 font-bold py-3 px-8 rounded-lg text-lg hover:bg-gray-100 transition shadow-lg text-center">
+                            Ver Catálogo
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Columna de Imagen (Placeholder) --><div class="relative min-h-64 sm:min-h-80 lg:min-h-full">
+                    <img 
+                        src="[https://placehold.co/800x600/1f2937/d1d5db?text=TeeVerse+Hero](https://placehold.co/800x600/1f2937/d1d5db?text=TeeVerse+Hero)" 
+                        alt="Imagen de camisetas de diseño" 
+                        class="w-full h-full object-cover"
+                        onerror="this.onerror=null; this.src='[https://placehold.co/800x600/1f2937/d1d5db?text=Banner+Principal](https://placehold.co/800x600/1f2937/d1d5db?text=Banner+Principal)'"
+                    >
+                    <!-- Pequeño detalle artístico --><div class="absolute bottom-0 right-0 p-4 text-xs text-white bg-black bg-opacity-50 rounded-tl-lg">
+                        #ArteParaVestir
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        
+        <!-- Sección de "Nuestra Promesa" --><section class="py-10">
+            <h2 class="serif-title text-4xl font-bold text-center mb-10">Nuestra Promesa</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-4">
+                    <div class="text-indigo-600 mb-3 mx-auto w-12 h-12">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3"/></svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Diseño Único</h3>
+                    <p class="text-gray-600 text-sm">Crea diseños desde cero con nuestro editor intuitivo.</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-indigo-600 mb-3 mx-auto w-12 h-12">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Calidad Premium</h3>
+                    <p class="text-gray-600 text-sm">Algodón orgánico y estampados duraderos.</p>
+                </div>
+                <div class="p-4">
+                    <div class="text-indigo-600 mb-3 mx-auto w-12 h-12">
+                        <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2">Envíos Rápidos</h3>
+                    <p class="text-gray-600 text-sm">Producción rápida y envío seguro a tu puerta.</p>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <!-- 3. Pie de Página (Footer) - B&W Clean -->
+    <footer class="bg-gray-50 border-t border-gray-100 mt-12 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+            
+            <div class="col-span-2 md:col-span-1">
+                <h4 class="serif-title text-xl font-bold mb-3">TeeVerse</h4>
+                <p class="text-gray-500">Arte que puedes vestir.</p>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-3">Descubrir</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="shop.html" class="hover:text-indigo-600">Novedades</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Artistas</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Colecciones</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-3">Ayuda</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="#" class="hover:text-indigo-600">FAQs</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Envíos y Devoluciones</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-3">Suscríbete</h4>
+                <form onsubmit="handleSubscribe(event)">
+                    <input type="email" placeholder="Tu correo electrónico" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 mb-2 text-gray-900">
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition">Unirme</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-10 text-xs text-gray-500">
+            <p>&copy; 2025 TeeVerse. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Carga de lógica -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+/* Definición de la paleta y fuentes según el estilo minimalista/artístico */
+:root {
+    --color-primary: #1f2937; /* Gris oscuro para texto */
+    --color-accent: #4f46e5; /* Índigo para CTA (toque de color) */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Inter', sans-serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--color-primary);
+    background-color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Estilo para titulares grandes (la tipografía Serif de contraste) */
+.serif-title {
+    font-family: var(--font-serif);
+}
+
+/* ESTILOS CLAVE DEL CUSTOMIZER (SIMULACIÓN 3D) */
+.customizer-canvas {
+    min-height: 500px;
+    background-color: #f3f4f6;
+    border: 1px dashed #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Contenedor de la Camiseta: Aquí es donde se aplica el color */
+.mock-tshirt-container {
+    width: 80%; 
+    height: 80%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+}
+
+/* La imagen base de la camiseta (blanca con pliegues, con transparencia) */
+.mock-tshirt-base {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Filtro de luminosidad para permitir que el color del fondo se "tiña" en la imagen */
+    filter: grayscale(1) brightness(0.9) contrast(1.2); 
+    transition: filter 0.3s ease;
+    mix-blend-mode: multiply; /* Funciona mejor si la imagen base es blanca */
+}
+
+/* Capa de Diseño: Posicionada sobre la camiseta */
+.mock-design-area {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%; 
+    height: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: move; /* Simula arrastrar */
+}
+
+.mock-design-text {
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+    word-break: break-all;
+    /* Estos estilos serán sobrescritos por el JS para reflejar el color del texto */
+}
+/* Estilos para los selectores de color en el customizer */
+.color-selector-swatch {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+.color-selector-swatch.active {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px white, 0 0 0 4px var(--color-accent);
+}
+
+/* Estilos de las tarjetas de producto en el catálogo (Shop) */
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}

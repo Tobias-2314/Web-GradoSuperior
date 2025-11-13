@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeeVerse | Catálogo</title>
+    <!-- Carga de Tailwind CSS (Necesario en cada HTML) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display:wght@700&display=swap)" rel="stylesheet">
+    <!-- Carga de estilos personalizados -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <!-- 1. Encabezado (Header) - Fijo y Minimalista -->
+    <header class="sticky top-0 z-10 bg-white border-b border-gray-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="text-2xl font-extrabold tracking-tight">
+                <a href="index.html" class="serif-title">TeeVerse</a>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold">
+                <a href="shop.html" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent border-gray-900 pb-1">Tienda</a>
+                <a href="customizer.html" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Diseñador</a>
+                <a href="#" class="text-gray-900 hover:text-gray-600 border-b-2 border-transparent hover:border-gray-900 pb-1">Sobre Nosotros</a>
+            </nav>
+            <div class="flex space-x-4 items-center">
+                <!-- Iconos (Mock de Lucide Icons) --><button class="p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                </button>
+                <a href="#" class="p-2 rounded-full hover:bg-gray-100 transition relative">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+                    <span id="cart-count" class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-indigo-600 rounded-full">2</span>
+                </a>
+                <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition">
+                    <svg xmlns="[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" x2="21" y1="6" y2="6"/><line x1="3" x2="21" y1="12" y2="12"/><line x1="3" x2="21" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. Contenido Principal (Página SHOP) -->
+    <main class="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <section class="page-title text-center mb-8">
+            <h1 class="serif-title text-5xl font-extrabold mb-2">Catálogo</h1>
+            <p class="text-lg text-gray-500">Explora diseños únicos y arte vestible.</p>
+        </section>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-10">
+            <!-- Barra Lateral de Filtros --><aside class="lg:col-span-1 p-4 border border-gray-100 rounded-xl shadow-lg h-fit">
+                <h2 class="text-xl font-bold mb-4 border-b pb-2">Filtrar</h2>
+
+                <div class="filter-group mb-6">
+                    <h3 class="font-semibold mb-2">Categoría</h3>
+                    <div id="category-filters" class="space-y-2">
+                        <!-- Categorías inyectadas por JS --></div>
+                </div>
+
+                <div class="filter-group mb-6">
+                    <h3 class="font-semibold mb-2">Color</h3>
+                    <div id="color-filters" class="flex flex-wrap gap-2">
+                        <!-- Colores inyectados por JS --></div>
+                </div>
+
+                <button id="apply-filters-btn" class="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition mt-4">Aplicar Filtros</button>
+            </aside>
+
+            <!-- Listado de Productos --><section class="lg:col-span-3">
+                <div class="flex justify-between items-center mb-6 border-b pb-2">
+                    <p class="text-sm text-gray-600"><span id="product-count">0</span> Productos</p>
+                    <select class="border border-gray-300 rounded-lg p-1 text-sm">
+                        <option>Ordenar por Novedad</option>
+                        <option>Ordenar por Precio: Menor a Mayor</option>
+                        <option>Ordenar por Precio: Mayor a Menor</option>
+                    </select>
+                </div>
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Tarjetas de producto inyectadas aquí --></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 3. Pie de Página (Footer) - B&W Clean -->
+    <footer class="bg-gray-50 border-t border-gray-100 mt-12 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+            
+            <div class="col-span-2 md:col-span-1">
+                <h4 class="serif-title text-xl font-bold mb-3">TeeVerse</h4>
+                <p class="text-gray-500">Arte que puedes vestir.</p>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-3">Descubrir</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="shop.html" class="hover:text-indigo-600">Novedades</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Artistas</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Colecciones</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-semibold mb-3">Ayuda</h4>
+                <ul class="space-y-2 text-gray-600">
+                    <li><a href="#" class="hover:text-indigo-600">FAQs</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Envíos y Devoluciones</a></li>
+                    <li><a href="#" class="hover:text-indigo-600">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-semibold mb-3">Suscríbete</h4>
+                <form onsubmit="handleSubscribe(event)">
+                    <input type="email" placeholder="Tu correo electrónico" required class="w-full p-2 border border-gray-300 rounded-lg focus:ring-indigo-500 focus:border-indigo-500 mb-2 text-gray-900">
+                    <button type="submit" class="w-full bg-indigo-600 text-white font-semibold py-2 rounded-lg hover:bg-indigo-700 transition">Unirme</button>
+                </form>
+            </div>
+        </div>
+        <div class="text-center mt-10 text-xs text-gray-500">
+            <p>&copy; 2025 TeeVerse. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    
+    <!-- Carga de lógica -->
+    <script src="app.js"></script>
+    <script>
+        // Inicializa la lógica del catálogo al cargar la página.
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProductGrid(MOCK_PRODUCTS);
+            document.getElementById('cart-count').textContent = '2'; 
+        });
+    </script>
+</body>
+</html>
